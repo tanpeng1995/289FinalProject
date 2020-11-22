@@ -1,5 +1,6 @@
 # 289FinalProject
 The main references for this project are:
+
 Yang, J., Wright, J., Huang, T. S., & Ma, Y. (2010). Image super-resolution via sparse representation. IEEE transactions on image processing, 19(11), 2861-2873.
 
 Lee, H., Battle, A., Raina, R., & Ng, A. Y. (2007). Efficient sparse coding algorithms. In Advances in neural information processing systems (pp. 801-808).
@@ -60,7 +61,7 @@ Files in each folder:
     continue search for a compatible one.
 
 ./python_code/super_resolution_demo.py: this is a demo shows how to use the model. It is also part of the
-    notebook. This one is running because once training is finished, the application can purely in python.
+    notebook. Once the training is completed in MATLAB, the application of the model is purely in python.
 
 ./python_code/train_coupled_dict.py: no longer used, is also part of other file.
 
