@@ -6,6 +6,7 @@ Yang, J., Wright, J., Huang, T. S., & Ma, Y. (2010). Image super-resolution via 
 Lee, H., Battle, A., Raina, R., & Ng, A. Y. (2007). Efficient sparse coding algorithms. In Advances in neural information processing systems (pp. 801-808).
 
 There are four folders in the repo
+
 ./Training: contains trained dictionary compact dictionary, and raw feature matrix.
 
 ./images: contains training images, demo example, and comparison.
@@ -18,6 +19,7 @@ There are four folders in the repo
 
 
 Files in each folder:
+
 ./matlab_code/L1_FeatureSign.m：solver used to solve LASSO regression use feature sign algorithm.
 
 ./matlab_code/L1_FeatureSign_Setup.m: setup for L1_FeatureSign.m, call L1_FeatureSign.m for each
