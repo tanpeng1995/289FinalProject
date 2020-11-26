@@ -233,4 +233,63 @@ False, they are both convex, but Lasso does not always have a closed-form soluti
 \underline{\textbf{Answer:}}\\
 False. The first two purposes are true, but not the last one. As it is mentioned early, both L1 and L2 terms are introduced to compensate for overfitting. By making the parameters equal with zero, the L1 norm discards some features and, thus, performs feature selection. In terms of smoothing, we cannot say L1 has this purpose, as the L1 loss function does not have continuous derivatives.
 \end{qparts}
+
+
+\newpage
+\section{Quick questions (HL)}
+Explain \textbf{in one or two sentences} why the statements are true (or false).
+\begin{qparts}
+\item L2 loss is more robust to outliers than L1 loss.\\
+\underline{\textbf{Answer:}}\\
+False \\
+The gradient of L2 loss can grow without bound whereas the L1 loss gradient is bounded, hence the influence of an outlier is limited.
+
+\item Logistic loss is better than L2 loss in classification tasks.\\
+\underline{\textbf{Answer:}}\\
+True \\ 
+With logistic loss, correctly classified points that are far away from the decision boundary have much less impact on the decision boundary.
+
+
+\item In terms of feature selection, L2 regularization is preferred since it comes up with sparse solutions.\\
+\underline{\textbf{Answer:}}\\
+False \\
+L1 regularization (LASSO) comes up with sparse solutions due to nonvanishing gradient at 0.
+\end{qparts}
+
+
+\newpage
+\section{Gradient descent}
+Denote by $\vec{x}\in\mathbb{R}^d$ data, by $\vec{w}\in\mathbb{R}^d$ the weight vector, by $y\in\mathbb{R}y$ lables, by $\lambda>0$ a regularization constant, and by m the total number of data points. Let R(w) be the regularized risk function:
+\begin{equation}
+R(w):=\frac{1}{m}\sum^m_{i=1}l(y_i-\left<w,x_i\right>)+\frac{\lambda}{2}||\vec{w}||^2 \quad\text{where}\quad l(\xi)=\begin{cases}
+\frac{1}{2}\xi^2 &\text{if $|\xi|<1$} \\
+|\xi|-\frac{1}{2} &\text{otherwise}
+\end{cases}
+\end{equation}
+\begin{qparts}
+\item Calculate the batch gradient of R(w) with respect to w.\\
+\underline{\textbf{Answer:}}\\
+Define $g_i$ as the gradient of ith data point.
+\begin{equation}
+g_i=\begin{cases}
+(\left<w,x_i\right>-y)x_i &\text{if$|\left<w,x_i\right>-y|<1$} \\
+\text{sgn}(\left<w,x_i\right>-y)x_i &\text{otherwise}
+\end{cases}
+\end{equation}
+\begin{equation}
+\frac{\partial R}{\partial w}=\frac{1}{m}\sum^m_{i=1}g_i+\lambda w
+\end{equation}
+
+\item Write out a stochastic gradient descent learning algorithm for minimizing R(w).\\
+\underline{\textbf{Answer:}}\\
+Randomly select a training instance $x_i$, update w as follows:
+\begin{equation}
+\vec{w}\leftarrow (1-\lambda\eta_t)\vec{w}-\eta_tg_i
+\end{equation}
+
+\item Name two common choices for choosing the learning rate and briefly explain their properties.\\
+\underline{\textbf{Answer:}}\\
+$O(\frac{1}{\sqrt{t}}), O(\frac{1}{t})$ for strong convexity, Polynomial decay, AdaGrad, etc.
+\end{qparts}
+
 \end{document}
