@@ -296,12 +296,46 @@ $O(\frac{1}{\sqrt{t}}), O(\frac{1}{t})$ for strong convexity, Polynomial decay, 
 \section{Multiple choice(DX)}
 \begin{qparts}
 \item You run gradient descent for 15 iterations with $\alpha = 0.3$ and compute after each iteration. You find that the value of $J(\theta)$ decreases slowly and is still decreasing after 15 iterations. Based on this, which of the following conclusions seems most plausible?\\
- a. Rather than use the current value of α, it’d be more promising to try a larger value of α (say $\alpha = 1.0$).
- b. Rather than use the current value of α, it’d be more promising to try a smaller value of α (say $\alpha = 0.1$).
- c. $\alpha = 0.3$ is an effective choice of learning rate.
+ a. Rather than use the current value of  $\alpha$, it’d be more promising to try a larger value of $\alpha$ (say $\alpha = 1.0$).\\
+ b. Rather than use the current value of $\alpha$, it’d be more promising to try a smaller value of $\alpha$ (say $\alpha = 0.1$).\\
+ c. $\alpha = 0.3$ is an effective choice of learning rate.\\
 \underline{\textbf{Answer:}}\\
 a
-\end{qparts}
+\item You run gradient descent for 15 iterations with $\alpha = 0.3$ and compute after each iteration. You find that the value of $J(\theta)$ decreases quickly then levels off. Based on this, which of the following conclusions seems most plausible?\\
+ a. Rather than use the current value of  $\alpha$, it’d be more promising to try a larger value of $\alpha$ (say $\alpha = 1.0$).\\
+ b. Rather than use the current value of $\alpha$, it’d be more promising to try a smaller value of $\alpha$ (say $\alpha = 0.1$).\\
+ c. $\alpha = 0.3$ is an effective choice of learning rate.\\
+\underline{\textbf{Answer:}}\\
+c
 
+\item Suppose you have $m = 23$ training examples with $n = 5$ features (excluding the additional all-ones feature for the intercept term, which you should add). The normal equation is $\theta = (X^{T} X)^{-1}X^{T}y$. For the given values of m and n, what are the dimensions of $\theta$, X, and y in this equation?\\
+a. X is 23 × 5, y is 23 × 1, $\theta$ is 5 × 5\\
+b. X is 23 × 6, y is 23 × 6, $\theta$ is 6 × 6\\
+c. X is 23 × 6, y is 23 × 1, $\theta$ is 6 × 1\\
+d. X is 23 × 5, y is 23 × 1, $\theta$ is 5 × 1\\
+\underline{\textbf{Answer:}}\\
+c\\
+ X has m rows and n+1 columns (+1 because of the $x_0=1$ term). y is m-vector. $\theta$ is an $(n+1)$-vector
+
+
+\item Suppose you have a dataset with $m = 1000000$ examples and $n = 200000$ features for each example. You want to use multivariate linear regression to fit the parameters $\theta$ to our data. Should you prefer gradient descent or the normal equation?\\
+a. Gradient descent, since it will always converge to the optimal $\theta$.\\
+b. Gradient descent, since $(X^T X)^{-1} $will be very slow to compute in the normal equation.\\
+c. The normal equation, since it provides an efficient way to directly find the solution.\\
+d. The normal equation, since gradient descent might be unable to find the optimal $\theta$.\\
+\underline{\textbf{Answer:}}\\
+b\\
+With $n = 200000$ features, you will have to invert a $200001 x 200001$ matrix to compute the normal equation. Inverting such a large matrix is computationally expensive, so gradient descent is a good choice.
+ 
+ \item Which of the following are reasons for using feature scaling?\\
+a. It is necessary to prevent gradient descent from getting stuck in local optima.\\
+b. It speeds up solving for $\theta$ using the normal equation.\\
+c. It prevents the matrix $X^T X$ (used in the normal equation) from being non-invertable (singular/degenerate).\\
+d. It speeds up gradient descent by making it require fewer iterations to get to a good solution.\\
+\underline{\textbf{Answer:}}\\
+d\\
+For a, the cost function $J(\theta)$ for linear regression has no local optima. For b, the magnitute of the feature values are significant in terms of computational cost. For c, feature scaling has nothing to do with matrix inversion. For d, feature scaling speeds up gradient descent by avoiding many extra iterations that are required when one or more features takes on much larger values than he rest.
+ 
+\end{qparts}
 
 \end{document}
