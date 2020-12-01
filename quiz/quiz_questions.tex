@@ -63,7 +63,7 @@
 }
 \maketitle
 
-\section{Elastic Net (HL)}
+\section{Elastic Net}
 In class we discussed two types of regularization, $l_1$ and $l_2$. Both are useful, and sometimes it is helpful combine them, giving the objective function below (\textbf{in this problem we have excluded} $w_0$ \textbf{for simplicity}):
 \begin{equation}
 F(\vec{w}) = \frac{1}{2}\sum^n_{j=1}(y^{(j)}-\sum^d_{i=1}\vec{w}_i\vec{x}_i^{(j)})^2+\alpha\sum^d_{i=1}|\vec{w}_i|+\frac{\lambda}{2}+\sum^d_{i=1}\vec{w}_i^2
@@ -203,7 +203,7 @@ The algorithm is shown in Algorithm.~\ref{algo:hl1}. You can compare it to the C
 \end{qparts}
 
 \newpage
-\section{True or False questions (HL)}
+\section{True or False questions}
 Answer True or False. Justify your answer very briefly in 1-2 sentences.
 \begin{qparts}
 \item Increasing the regularization parameter $\lambda$ in lasso regression leads to sparser regression coefficients.
@@ -236,7 +236,7 @@ False. The first two purposes are true, but not the last one. As it is mentioned
 
 
 \newpage
-\section{Quick questions (HL)}
+\section{Quick questions}
 Explain \textbf{in one or two sentences} why the statements are true (or false).
 \begin{qparts}
 \item L2 loss is more robust to outliers than L1 loss.\\
@@ -258,7 +258,7 @@ L1 regularization (LASSO) comes up with sparse solutions due to nonvanishing gra
 
 
 \newpage
-\section{Gradient descent (HL)}
+\section{Gradient descent}
 Denote by $\vec{x}\in\mathbb{R}^d$ data, by $\vec{w}\in\mathbb{R}^d$ the weight vector, by $y\in\mathbb{R}y$ lables, by $\lambda>0$ a regularization constant, and by m the total number of data points. Let R(w) be the regularized risk function:
 \begin{equation}
 R(w):=\frac{1}{m}\sum^m_{i=1}l(y_i-\left<w,x_i\right>)+\frac{\lambda}{2}||\vec{w}||^2 \quad\text{where}\quad l(\xi)=\begin{cases}
@@ -293,7 +293,7 @@ $O(\frac{1}{\sqrt{t}}), O(\frac{1}{t})$ for strong convexity, Polynomial decay, 
 \end{qparts}
 
 \newpage
-\section{Multiple choice(DX)}
+\section{Multiple choice}
 \begin{qparts}
 \item You run gradient descent for 15 iterations with $\alpha = 0.3$ and compute after each iteration. You find that the value of $J(\theta)$ decreases slowly and is still decreasing after 15 iterations. Based on this, which of the following conclusions seems most plausible?\\
  a. Rather than use the current value of  $\alpha$, it’d be more promising to try a larger value of $\alpha$ (say $\alpha = 1.0$).\\
