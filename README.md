@@ -5,7 +5,7 @@ Yang, J., Wright, J., Huang, T. S., & Ma, Y. (2010). Image super-resolution via 
 
 Lee, H., Battle, A., Raina, R., & Ng, A. Y. (2007). Efficient sparse coding algorithms. In Advances in neural information processing systems (pp. 801-808).
 
-There are four folders in the repo
+There are several important folders in the repo
 
 ./Training: contains trained dictionary compact dictionary, and raw feature matrix.
 
@@ -16,6 +16,15 @@ There are four folders in the repo
 ./python_code: the equivalent training code in python is given (it is not used in practice,
     it is provided for the sake of completeness and for the ease to demonstrate in notebook).
     The application of model is implemented use python.
+    
+./Report: contains final report of this project
+
+./slide: contains final PowerPoint and its pdf version
+
+./quiz: contains quiz or assignment
+
+The fully working jupyter notebook is in ./python_code/Sparse_Representation.ipynb.
+-To run the code, downloads whole repo, otherwise the file address might not match.
 
 
 Files in each folder:
