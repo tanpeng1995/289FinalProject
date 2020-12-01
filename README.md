@@ -25,6 +25,7 @@ There are several important folders in the repo
 
 The fully working jupyter notebook is in ./python_code/Sparse_Representation.ipynb.
 -To run the code, downloads whole repo, otherwise the file address might not match.
+-For some reasons, some Markdowns do not show in Github. We recommend users run it locally.
 
 
 Files in each folder:
