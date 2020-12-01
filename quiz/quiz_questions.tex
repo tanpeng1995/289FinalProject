@@ -63,6 +63,48 @@
 }
 \maketitle
 
+\section{Basic Question}
+\begin{qparts}
+\item  A computer program is said to learn from experience E with respect to some task T and some performance measure P if its performance on T, as measured by P, improves with experience E.\\
+ Suppose we feed a learning algorithm a lot of historical weather data, and have it learn to predict weather. What would be a reasonable choice for P? \\
+a. The probability of it correctly predicting a future date’s weather.\\
+b. The weather prediction task.\\
+c. The process of the algorithm examining a large amount of historical weather data.\\
+d. None of these.\\
+\underline{\textbf{Answer:}}\\
+a
+
+
+ \item  A computer program is said to learn from experience E with respect to some task T and some performance measure P if its performance on T, as measured by P, improves with experience E. \\
+ Suppose we feed a learning algorithm a lot of historical weather data, and have it learn to predict weather. In this setting, what is T?\\
+ a. The weather prediction task.\\
+b. The probability of it correctly predicting a future date’s weather.\\
+c. The process of the algorithm examining a large amount of historical weather data.\\
+d. None of these.\\
+ 
+\underline{\textbf{Answer:}}\\
+a
+
+ \item  Suppose you are working on weather prediction, and use a learning algorithm to predict tomorrow’s temperature (in degrees Centigrade/Fahrenheit).\\
+Would you treat this as a classification or a regression problem?\\
+a. Regression\\
+b. Classification\\
+ 
+\underline{\textbf{Answer:}}\\
+a
+
+ \item  Suppose you are working on weather prediction, and your weather station makes one of three predictions for each day’s weather: Sunny, Cloudy or Rainy. You’d like to use a learning algorithm to predict tomorrow’s weather.\\
+Would you treat this as a classification or a regression problem?\\
+a. Regression\\
+b. Classification\\
+ 
+\underline{\textbf{Answer:}}\\
+b
+
+\end{qparts}
+
+
+\newpage
 \section{Elastic Net}
 In class we discussed two types of regularization, $l_1$ and $l_2$. Both are useful, and sometimes it is helpful combine them, giving the objective function below (\textbf{in this problem we have excluded} $w_0$ \textbf{for simplicity}):
 \begin{equation}
@@ -144,7 +186,12 @@ For each case, mark the minimum as either 0, $\tilde{x}^-$, or $\tilde{x}^+$. (Y
     \caption{Example picture of three cases.}
     \label{fig:hl1} 
 \end{figure*}
+\end{qparts}
 
+
+\newpage
+\section{Elastic Net Plus}
+\begin{qparts}
 \item {[}8 points{]} 
 Write $x^*$, the minimum of $f_2(x)$, as a piecewise function of g. (Hint: what is
 g in the cases above?)\\
@@ -293,7 +340,33 @@ $O(\frac{1}{\sqrt{t}}), O(\frac{1}{t})$ for strong convexity, Polynomial decay, 
 \end{qparts}
 
 \newpage
-\section{Multiple choice}
+\section{Logistic Regression}
+
+\begin{qparts}
+ \item For logistic regression, the gradient is given by $\frac{\partial }{\partial \theta_j } J(\theta) = \frac{1}{m} \sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{i})x^{(i)}_j$. Which of these is a correct gradient descent update for logistic regression with a learning rate of $\alpha$? \\
+ Check all that apply.\\
+ a. $\theta_j := \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m (h_\theta(x^{(i)-y^i}) x^{(i)}_j$ (simultaneously update for all j).\\
+ b. $\theta := \theta - \alpha \frac{1}{m} \sum_{i=1}^m (\theta^Tx-y^{(i)}) x^{(i)}$.\\
+ c. $\theta_j := \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m \left(\frac{1}{1+e^{-\theta^Tx^{(i)}}}-y^{(i)}\right) x^{(i)}_j$ (simultaneously update for all j).\\
+ d. $\theta_j := \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m (h_\theta(x^{(i)-y^i}) x^{(i)}$ (simultaneously update for all j).\\
+ 
+\underline{\textbf{Answer:}}\\
+ac
+
+ \item Suppose that you have trained a logistic regression classifier, and it outputs on a new example a prediction $h_\theta(x) = 0.2$. This means (check all that apply):\\
+a. Our estimate for $P(y = 1|x; \theta)$ is 0.8.\\
+b. Our estimate for $P(y = 0|x; \theta)$ is 0.8.\\
+c. Our estimate for $P(y = 1|x; \theta)$ is 0.2.\\
+d. Our estimate for $P(y = 0|x; \theta)$ is 0.2.\\
+ 
+\underline{\textbf{Answer:}}\\
+bc
+
+\end{qparts}
+
+\newpage
+\section{Multiple choice I}
+In this part, you only need to choose one correct answer.
 \begin{qparts}
 \item You run gradient descent for 15 iterations with $\alpha = 0.3$ and compute after each iteration. You find that the value of $J(\theta)$ decreases slowly and is still decreasing after 15 iterations. Based on this, which of the following conclusions seems most plausible?\\
  a. Rather than use the current value of  $\alpha$, it’d be more promising to try a larger value of $\alpha$ (say $\alpha = 1.0$).\\
@@ -338,4 +411,72 @@ For a, the cost function $J(\theta)$ for linear regression has no local optima. 
  
 \end{qparts}
 
+
+\newpage
+\section{Multiple choice II}
+In this part, some questions may have multiple correct answers.
+\begin{qparts}
+
+ \item Some of the problems below are best addressed using a supervised learning algorithm, and the others with an unsupervised learning algorithm. Which of the following would you apply supervised learning to? (Select all that apply.) In each case, assume some appropriate dataset is available for your algorithm to learn from.\\
+ a. Given historical data of children’s ages and heights, predict children’s height as a function of their age.\\
+ b. Given 50 articles written by male authors, and 50 articles written by female authors, learn to predict the gender of a new manuscript’s author (when the identity of this author is unknown).\\
+ c. Take a collection of 1000 essays written on the US Economy, and find a way to automatically group these essays into a small number of groups of essays that are somehow “similar” or “related”.\\
+ d. Examine a large collection of emails that are known to be spam email, to discover if there are sub-types of spam mail.\\
+ 
+\underline{\textbf{Answer:}}\\
+ab
+
+ \item Some of the problems below are best addressed using a supervised learning algorithm, and the others with an unsupervised learning algorithm. Which of the following would you apply supervised learning to? (Select all that apply.) In each case, assume some appropriate dataset is available for your algorithm to learn from.\\
+a. Given data on how 1000 medical patients respond to an experimental drug (such as effectiveness of the treatment, side effects, etc.), discover whether there are different categories or “types” of patients in terms of how they respond to the drug, and if so what these categories are.\\
+b. Given a large dataset of medical records from patients suffering from heart disease, try to learn whether there might be different clusters of such patients for which we might tailor separate treatments.\\
+c. Have a computer examine an audio clip of a piece of music, and classify whether or not there are vocals (i.e., a human voice singing) in that audio clip, or if it is a clip of only musical instruments (and no vocals).\\
+d. Given genetic (DNA) data from a person, predict the odds of him/her developing diabetes over the next 10 years.\\
+ 
+ \underline{\textbf{Answer:}}\\
+cd
+
+
+ \item Some of the problems below are best addressed using a supervised learning algorithm, and the others with an unsupervised learning algorithm. Which of the following would you apply supervised learning to? (Select all that apply.) In each case, assume some appropriate dataset is available for your algorithm to learn from.\\
+a. Take a collection of 1000 essays written on the US Economy, and find a way to automatically group these essays into a small number of groups of essays that are somehow “similar” or “related”.\\
+b. Given genetic (DNA) data from a person, predict the odds of him/her developing diabetes over the next 10 years.\\
+c. Examine a large collection of emails that are known to be spam email, to discover if there are sub-types of spam mail.\\
+d. Examine the statistics of two football teams, and predict which team will win tomorrow’s match (given historical data of teams’ wins/losses to learn from).\\
+ 
+ \underline{\textbf{Answer:}}\\
+bc
+
+
+ \item Which of these is a reasonable definition of machine learning?\\
+a. Machine learning is the science of programming computers.\\
+b. Machine learning learns from labeled data.\\
+c. Machine learning is the field of allowing robots to act intelligently.\\
+d. Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.\\
+ 
+ \underline{\textbf{Answer:}}\\
+d
+
+\end{qparts}
+
+\newpage
+\section{Extra Question}
+\begin{qparts}
+
+ \item Which of the following statements about regularization are true? Check all that apply.\\
+a. Using a very large value of $\lambda$ hurt the performance of your hypothesis; the only reason we do not set $\lambda$ to be too large is to avoid numerical problems.\\
+b. Because logistic regression outputs values$ 0 \leq h_\theta(x) \leq 1$, its range of output values can only be “shrunk” slightly by regularization anyway, so regularization is generally not helpful for it.\\
+c. Consider a classification problem. Adding regularization may cause your classifier to incorrectly classify some training examples (which it had correctly classified when not using regularization, i.e. when $\lambda$ = 0).\\
+d. Using too large a value of $\lambda$ can cause your hypothesis to overfit the data; this can be avoided by reducing $\lambda$.\\
+ \underline{\textbf{Answer:}}\\
+ c
+
+ \item Which of the following statements about regularization are true? Check all that apply.\\
+a. Using a very large value of $\lambda$ hurt the performance of your hypothesis; the only reason we do not set $\lambda$ to be too large is to avoid numerical problems.\\
+b. Because logistic regression outputs values$ 0 \leq h_\theta(x) \leq 1$, its range of output values can only be “shrunk” slightly by regularization anyway, so regularization is generally not helpful for it.\\
+c. Because regularization causes $J(\theta)$ to no longer be convex, gradient descent may\\
+d. Using too large a value of $\lambda$ can cause your hypothesis to underfit the data; this can be avoided by reducing $\lambda$.\\
+ \underline{\textbf{Answer:}}\\
+d
+
+
+\end{qparts}
 \end{document}
