@@ -20,7 +20,7 @@ There are several important folders in the repo:
 * ./quiz: contains quiz or assignment.
 
 ## Content
-### How to reproduce the results
+## How to reproduce the results
 The fully working jupyter notebook is in ./python_code/Sparse_Representation.ipynb. To run the code, downloads whole repo, otherwise the file address might not match. For some reasons, some Markdowns do not show in Github. We recommend users run it locally.
 
 
