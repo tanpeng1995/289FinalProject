@@ -62,7 +62,144 @@
   \texttt{\{han\_liu, tanpeng, diluxu, jinyan\_zhao\}@berkeley.edu} \\
 }
 \maketitle
+\section{Lagrange Duality and the LASSO}
+This question is extra credit!
 
+It is often the case that we will wish to include additional constraints on our regularization terms. For instance if we wish to limit the size of our weights to be below a specific constant term, or if we wish that all of our weights should be non-negative, etc. in these scenarios, Lagrange multipliers are a powerful tool
+that allows us to incorporate these constraints into our objective functions.
+Also, in general, we have seen for $n \times p$ data, with n observation and p features that $n >> p$ where p is the dominant factor for the computation time in things like linear regression training, which is fine. However, in some scenarios $p >> n$, and this becomes a problem such as when we use the kernel trick! We find that reformulating these problems into their duals gives us the alternative dominant factor.
+
+Here we will explore both of these phenomena simultaneously and see how to formulate a problem with the Lagrangian dual!
+
+This problem follows the formulation in Osborne et al, 2000:
+
+\underline{http://www4.stat.ncsu.edu/~hzhang/paper/osborne.pdf}
+
+By its original definition, the LASSO estimator solves the optimization problem
+\begin{equation}
+\text{minimize}_{w_1,\cdots, w_m}f(\vec{w})=\frac{1}{2}\sum^n_{i=1}(y_i-\sum^m_{j=1}x_{ij}w_j)^2
+\end{equation}
+subject to 
+\begin{equation}
+f_1(\vec{w})=\sum^m_{j=1}|w_j|\leq t\quad\text{for some $t>0$}
+\end{equation}
+I.e. it minimizes half the sum of squared errors, subject to the constraint that $|\hat{w}|_1\leq t$.
+
+In this question, you will use Lagrangian duality to show that this formulation is equivalent to the following optimization problem (i.e. standard L1-regularized regression):
+\begin{equation} \label{eq:dual}
+\text{minimize}_{w_1,\cdots, w_m}f(\vec{w})=\frac{1}{2}\sum^n_{i=1}(y_i-\sum^m_{j=1}x_{ij}w_j)^2+\lambda\sum^m_{j=1}|w_j|\quad\text{for some $\lambda>0$}
+\end{equation}
+Specifically: you will convert the constrained optimization problem 1 into a Lagrange Multiplier problem. From there you will find that when w is an optimal solution to the constrained optimization problem and $\lambda$ is the Lagrange multiplier associated with w, then w is also an optimal solution of the regularized regression problem with penalty coefficient $\lambda$. Your task is to complete part of this proof.
+\begin{qparts}
+\item {[}5 points{]}
+The function 3 is convex in w (quadratic plus L1 norm), which means its minima satisfy
+$\triangledown$w(Eq. 3) = 0. Compute the gradient with respect to w of this expression and show that the resulting condition for any optimal w is
+\begin{equation}
+0=-X^T(y-XW)+\lambda v
+\end{equation}
+
+where $v=(v_1,\cdots, v_m)\in\mathbb{R}^m$ satisfies $v_i=\begin{cases}
+1 & \text{if $w_i>0$} \\
+-1 & \text{if $w_i<0$} \\
+\in[-1,1] &\text{if $w_i=0$} 
+\end{cases}$
+This awkward-seeming vector v is the result of taking the derivative of absolute value terms $|w_i|$, where the wi are of unknown sign. \textit{Hint: this is similar to the derivation of the normal equation in the regression notes.}\\
+\underline{\textbf{Answer:}}\\
+{\color{blue}
+The same as the derivation of the normal equation in the notes; no need to provide
+much more detail. The v term is new and arises directly from taking partial derivatives of the $|w_i|$ terms.}
+
+\item {[}5 points{]}
+The next step is to take each case of the KKT conditions and solve the constrained optimization problem using Lagrange multipliers. To do this, note that if X is full-rank and $m \leq n$, then the ordinary least-squares regression (OLS) problem has a unique solution:
+\begin{equation}
+\hat{w}=(X^TX)^{-1}X^TY
+\end{equation}
+On the other hand, if $m > n$, then the solution $\hat{w}$ to the OLS problem is not unique. Let W be the set of solutions to a particular OLS problem. One can show (see Osbourne et al.) that if $t_0$ is defined as
+\begin{equation}
+t_0=\min_{\vec{w}\in W}||\vec{w}||_1\quad\text{L1 norm}
+\end{equation}
+then the constraint 2 is active if and only if $t < t_0$. In other words, if $t \geq t_0$, then the constraint doesn’t matter– a solution to 1 just has to optimize the unconstrained OLS problem. On the other hand, if $t < t_0$, then the constraint 2 must be active for any solution w; in other words, this inequality constraint becomes an equality. Moreover, one can show that when $t < t_0$, at least one optimal w for
+the constrained problem 1 is guaranteed to exist on the boundary of the feasible region (the feasible region is the set of all w such that the constraint 2 is satisfied).
+
+Based on this discussion, we only need to find solutions for one case of the KKT conditions when $t < t_0$. Which case is this, and why? \\
+\underline{\textbf{Answer:}}\\
+{\color{blue}
+When t < t0, the constraint must be active at any optimum.
+This means we must have $t - f_1(w) = 0$.
+}
+
+\item {[}10 points{]}
+Define
+\begin{equation}
+L^*(\vec{w})=\max_{\lambda\geq 0}L(\vec{w}, \lambda)
+\end{equation}
+Show that
+\begin{equation}
+L^*(\vec{w})=\begin{cases}
+f(\vec{w}) & \text{if $t - f_1(w) \geq 0$} \\
+\infty & \text{if $t - f_1(w) < 0$} \\
+\end{cases}
+\end{equation}
+Argue that, therefore, when $t < t_0$, minimizing $L^*(\vec{w})$ over all possible w is equivalent to solving the constrained optimization problem 1. Minimizing $L^*(\vec{w})$ is known as the primal problem.
+\textit{Hint: Show that if w optimizes the constrained problem, then it also must minimize $L^*$. Next, show that if w minimizes $L^*$, then it also must optimize the constrained problem. Proof by contradiction may be useful.}\\
+\underline{\textbf{Answer:}}\\
+{\color{blue}
+In the first case: when $t - f_1(w) \geq 0$, then $L(w, \lambda)$ is maximized when $\lambda = 0$. This leaves only $f(w)$. In the second case: when $t - f_1(w) < 0$, then bigger $\lambda$ always makes $L(w, \lambda)$ bigger; hence the max goes to infinity.
+
+Suppose w minimizes the constrained optimization problem. Then from the previous question, we must have $t - f_1(w) = 0$. Suppose there exists $w_0$ such that $L^*(\vec{w}_0) < L^*(\vec{w})$. Since $t - f_1(w) = 0$, we must then have $f(\vec{w}_0) < f(\vec{w})$ with the constraint satisfied. But then w does not minimize the constrained optimization problem; contradiction. On the other hand, suppose w minimizes $L^*$. For any $t \geq 0$, there always exists some w with L1 norm not greater than t. Hence w is in the feasible region $t - f1(w) \geq 0$, and the minimal $L^*(\vec{w})$ is finite. Suppose $f(w0) < f(w) $for feasible $w0$. Then we would also have $L^*(\vec{w}_0) < L^*(\vec{w})$, contradition. This completes the proof of equivalence between the two problems.
+}
+
+\item {[}5 points{]}
+Define
+\begin{equation}
+g(\lambda)=\min_{\vec{w}\in\mathbb{R}^m}L(\vec{w}, \lambda)
+\end{equation}
+Maximizing $g(\lambda)$ for $\lambda\geq 0$ is the dual problem to the primal shown above.
+
+One can show that, for fixed $\lambda$, $L(\vec{w}, \lambda)$ has at least one minimum over w. We can solve for a minimum in the usual way: by taking the gradient of L with respect to w and setting it to zero. Do this to show that if $\bar{w}$ minimizes $L(\vec{w}, \lambda)$ for fixed $\lambda$, then
+\begin{equation}
+0=-X^T(y-X\bar{w})+\lambda v
+\end{equation}
+with v defined as before, in 4.\\
+\underline{\textbf{Answer:}}\\
+{\color{blue}
+Same as before; only the extra $-\lambda t$ term is new, and it vanishes when we take the
+gradient with respect to $\vec{w}$.
+}
+
+\item {[}5 points{]}
+Show that $\vec{v}^T\bar{w}=||\bar{w}||_1$. Consequently, show that if $\bar{w}$ minimizes $L(\vec{w}, \lambda)$ for fixed $\Lambda$, then
+\begin{equation}
+\lambda=\frac{(y-X\bar{w})^TX\bar{w}}{||\bar{w}||_1}
+\end{equation}
+We call this value of $\lambda$ the Lagrange multiplier associated with $\bar{w}$. \textit{Hint: recall that $(AB)^T=B^TA^T$.}\\
+\underline{\textbf{Answer:}}\\
+{\color{blue}
+First, $\vec{v}^T\bar{w}=\sum^m_{i=1}v_i\bar{w}_i$. By definition, each $v_i$ has magnitude 1 and the same sign as $\bar{w}_i$. Hence their product is $|\bar{w}_i|$. The sum of these is the L1 norm of $\vec{w}$.
+
+Next, we start with
+
+\begin{gather}
+0=-X^T(y-X\bar{w})+\lambda v, \quad\text{and so} \\
+\lambda v=X^T(y-X\bar{w}), \quad\text{and so} \\
+\lambda v^T=(y-X\bar{w})^TX, \quad\text{and so} \\
+\lambda v^T\bar{w}=(y-X\bar{w})^TX\bar{w}, \quad\text{and so} \\
+\lambda=\frac{(y-X\bar{w})^TX\bar{w}}{||\bar{w}||_1}\quad\text{as desired.}
+\end{gather}
+It turns out that strong duality holds for this problem (see Theorem 3 in Osborne et al), which means: if $w^*$ is a solution of the primal problem (equivalently, of the constrained optimization problem 1) and $\lambda^*$ is the Lagrange multiplier corresponding to $w^*$, then $\lambda^*$ is a solution of the dual problem, and hence
+the optimal primal and dual function values are equal:
+\begin{equation}
+g(\lambda^*)=L^*(\vec{w}^*)=f(\vec{w}^*)
+\end{equation}
+for f as defined in 1.
+
+Let’s review: we began by trying to solve the constrained optimization problem 1. We saw that this is equivalent to solving the primal problem 7. Due to strong duality, we can solve either the primal or dual problem to obtain an optimal w for 1. Given a solution w for 1, we can compute the Lagrange multiplier associated with it using 11. On the other hand, given $\lambda$, any optimal w for the penalized regression problem 3 satisfies exactly the same equations (4) as are satisfied by solutions to 1. This means: when w is an optimal solution to the constrained optimization problem and $\lambda$ is the Lagrange
+multiplier associated with w, then w is also an optimal solution of the penalized regression problem with penalty coefficient $\lambda$.
+}
+
+
+\end{qparts}
+\newpage
 \section{Basic Question}
 \begin{qparts}
 \item  A computer program is said to learn from experience E with respect to some task T and some performance measure P if its performance on T, as measured by P, improves with experience E.\\
